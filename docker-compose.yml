@@ -1,0 +1,46 @@
+# ft_trans' services layout composition
+version: "3.9"
+
+# Storage volumes
+# volumes:
+
+# Internal networks
+networks:
+  api:
+
+# The actual services
+services:
+  # The backend / API
+  # api:
+  #   build: ./api
+  #   env_file: .env
+  #   restart: unless-stopped
+  #   ports:
+  #     - "1337:1337"
+  #   depends_on:
+  #     - "database"
+
+  # The frontend website
+  # frontend:
+  #   build: ./frontend
+  #   env_file: .env
+  #   restart: unless-stopped
+  #   ports:
+  #     - "80:42069"
+  #   depends_on:
+  #     - "api"
+
+  # A global database, used for storing users, scores, game data, etc.
+  database:
+    # We're using PostgreSQL as per the subject's requirements
+    image: postgres:latest
+    env_file: .env
+    restart: unless-stopped
+    ports:
+      - "5432:5432"
+    networks:
+      - api
+
+  # A Redis instance that will act as a fast cache-layer
+  # redis:
+  #   image: redis
