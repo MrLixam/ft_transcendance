@@ -14,14 +14,14 @@
 The transcendance project is split into multiple Minor and Major modules. Here are the one we're doing:
 
 - **Web**
-  - [ ] (Major) Use a Framework as backend
-  - [ ] (Minor) Use a front-end framework or toolkit
-  - [ ] (Minor) Use a database for the backend
+  - [x] (Major) Use a Framework as backend
+  - [x] (Minor) Use a front-end framework or toolkit
+  - [x] (Minor) Use a database for the backend
   - [ ] (Major) Store the score of a tournament in a Blockchain
 
 - **User Management**
-  - [ ] (Major) Standard user management, authentication, users across tournaments
-  - [ ] (Major) Implementing remote authentication (OAuth2)
+  - [x] (Major) Standard user management, authentication, users across tournaments
+  - [x] (Major) Implementing remote authentication (OAuth2)
 
 - **Gameplay and User Experience**
   - [ ] (Major) Remote players
@@ -42,7 +42,7 @@ The transcendance project is split into multiple Minor and Major modules. Here a
 - **Devops**
   - [ ] (Major) Infrastructure Setup for Log Management
   - [ ] (Minor) Monitoring system
-  - [ ] (Major) Designing the Backend as Microservices
+  - [x] (Major) Designing the Backend as Microservices
 
 - **Graphics**
   - [ ] (Major) Use of advanced 3D techniques.
