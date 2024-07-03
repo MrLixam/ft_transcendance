@@ -2,11 +2,12 @@
 
 > Ping? Pong! Now with a side of `Uncaught TypeError: this.document is undefined`
 
-## Tech stack
-
-- no clue yet lol
-
 ## Project structure
+
+- `/` *project root*
+  - `api/` *the Django backend*
+  - `frontend/` *the HTML front-end*
+  - `docker-compose.yml` *a compose config file*
 
 ## License
 
