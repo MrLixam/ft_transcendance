@@ -79,8 +79,10 @@ To start everything, simply run:
 docker compose up --build -d
 
 # or with legacy cli
-docker-compose up --build -d
+# docker-compose up --build -d
 ```
+
+Alternatively, a GNU make `Makefile` is provided, with the `up` and `down` rules.
 
 ## License
 
