@@ -4,10 +4,11 @@
 
 ## Project structure
 
-- `/` *project root*
-  - `api/` *the Django backend*
-  - `frontend/` *the HTML front-end*
-  - `docker-compose.yml` *a compose config file*
+- `api/` *the Django backend*
+  - The django backend, organized in a micro-services fashion
+- `frontend/` *the HTML front-end*
+- `nginx/`
+- `docker-compose.yml` *a compose config file*
 
 ## Chosen modules
 
@@ -35,14 +36,14 @@ The transcendance project is split into multiple Minor and Major modules. Here a
   - [ ] (Minor) User and Game stats dashboard
 
 - **Cybersecurity**
-  - [ ] (Major) Implement WAF/ModSecurity w/ Hardened Configuration and HashiCorp Vault for Secrets Management
+  - [x] (Major) Implement WAF/ModSecurity w/ Hardened Configuration and HashiCorp Vault for Secrets Management (@xtrm-en)
   - [ ] (Minor) GDPR Compliance options with User Anonymization, local data management, and account deletion
-  - [ ] (Major) Implement Two-Factor Authentication (2FA) and JWT
+  - [x] (Major) Implement Two-Factor Authentication (2FA) and JWT
 
 - **Devops**
-  - [ ] (Major) Infrastructure Setup for Log Management
+  - [ ] (Major) Infrastructure setup for log management
   - [ ] (Minor) Monitoring system
-  - [x] (Major) Designing the Backend as Microservices
+  - [x] (Major) Designing the Backend as Microservices (@xtrm-en)
 
 - **Graphics**
   - [ ] (Major) Use of advanced 3D techniques.
