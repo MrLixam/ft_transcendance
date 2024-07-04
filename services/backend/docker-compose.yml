@@ -2,7 +2,7 @@ version: "3.9"
 name: ft_trans-backend
 
 include:
-  - ./website/docker-compose.yml
+  - ./website-service/docker-compose.yml
 
 networks:
   backend:

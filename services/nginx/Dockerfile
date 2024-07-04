@@ -11,6 +11,7 @@ FROM nginx:${NGINX_IMAGE_VERSION}-alpine
 LABEL maintainer="kiroussa <oss@xtrm.me>"
 
 ENV NGINX_IMG_VERSION=1.27.0
+ENV BROTLI_NGX_REV=a71f9312c2deb28875acc7bacfdd5695a111aa53
 ENV MODSEC_VERSION=3.0.12
 ENV MODSEC_CONNECTOR_VERSION=1.0.3
 ENV OWASP_CRS_VERSION=4.4.0
@@ -40,9 +41,10 @@ RUN apk update && apk add --no-cache \
 
 RUN git clone --recurse-submodules -j8 https://github.com/google/ngx_brotli.git /tmp/ngx_brotli
 WORKDIR /tmp/ngx_brotli
-# Pin to known version
-RUN git checkout a71f9312c2deb28875acc7bacfdd5695a111aa53
+RUN git checkout $BROTLI_NGX_REV 
 RUN mkdir /tmp/ngx_brotli/deps/brotli/out -p
+
+# Build ngx_brotli and its dependencies
 WORKDIR /tmp/ngx_brotli/deps/brotli/out
 RUN cmake -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=OFF -DCMAKE_C_FLAGS="-Ofast -m64 -march=native -mtune=native -flto -funroll-loops -ffunction-sections -fdata-sections -Wl,--gc-sections" -DCMAKE_CXX_FLAGS="-Ofast -m64 -march=native -mtune=native -flto -funroll-loops -ffunction-sections -fdata-sections -Wl,--gc-sections" -DCMAKE_INSTALL_PREFIX=./installed ..
 RUN cmake --build . --config Release --target brotlienc
@@ -61,28 +63,32 @@ RUN ./configure
 RUN make -j$(nproc)
 RUN make install
 
-##> Download ModSecurity-nginx connector <##
-
+# Download ModSecurity Nginx Connector
 RUN wget -O /tmp/modsecurity-connector.tar.gz \
 	https://github.com/owasp-modsecurity/ModSecurity-nginx/releases/download/v${MODSEC_CONNECTOR_VERSION}/modsecurity-nginx-v${MODSEC_CONNECTOR_VERSION}.tar.gz
 RUN mkdir -p /tmp/modsec-connector
 RUN tar -xvzf /tmp/modsecurity-connector.tar.gz -C /tmp/modsec-connector
 
 # Download nginx... again
+
+##> Download and build nginx modules <##
+
+# Download nginx
 RUN wget -O /tmp/nginx.tar.gz \
 	http://nginx.org/download/nginx-$NGINX_IMG_VERSION.tar.gz
 WORKDIR /tmp
 RUN tar -xvzmf nginx.tar.gz
 WORKDIR /tmp/nginx-${NGINX_IMG_VERSION}
 
-# Catch the current docker nginx' configure options
+# Catch the current (docker's) nginx's configure options
 RUN nginx -V 2>&1 | grep "configure arguments" > /tmp/nginx-configure-args.txt
 
 # Build nginx modules with ModSecurity and Brotli
-RUN sh -c "./configure --add-dynamic-module=../modsec-connector/modsecurity-nginx-v${MODSEC_CONNECTOR_VERSION} \
+RUN sh -c "./configure \
+	--add-dynamic-module=../modsec-connector/modsecurity-nginx-v${MODSEC_CONNECTOR_VERSION} \
 	--with-compat --add-dynamic-module=/tmp/ngx_brotli \
 	$(cat /tmp/nginx-configure-args.txt | cut -d' ' -f3-)"
-RUN make modules
+RUN make modules -j$(nproc)
 
 # Copy the module to the nginx modules directory
 RUN mkdir -p /etc/nginx/modules

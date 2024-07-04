@@ -19,8 +19,11 @@
         devShell = pkgs.mkShell {
           nativeBuildInputs = with pkgs; [
             python312
+            
             python312Packages.django
-            python312Packages.djangorestframework
+
+            python312Packages.black
+            python312Packages.mypy
           ];
         };
       }

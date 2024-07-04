@@ -19,9 +19,12 @@ FROM python:3.11-slim-buster AS runtime
 ENV VIRTUAL_ENV=/app/.venv \
     PATH="/app/.venv/bin:$PATH"
 
+WORKDIR /app
+
 COPY --from=builder ${VIRTUAL_ENV} ${VIRTUAL_ENV}
 
-COPY website ./website
-COPY manage.py ./
+COPY website-service ./website-service
 
-ENTRYPOINT ["python", "manage.py", "runserver", "0.0.0.0:42069"]
+EXPOSE 42069
+
+ENTRYPOINT ["django-admin", "runserver", "--pythonpath=.", "--settings=website-service.main", "0.0.0.0:42069"]

@@ -12,3 +12,5 @@ services:
     networks:
       - backend
       - nginx
+    volumes:
+      - "../../frontend:/app/templates"
