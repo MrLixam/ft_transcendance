@@ -1,0 +1,42 @@
+version: "3.9"
+name: "ft_trans' API"
+
+networks:
+  api:
+    driver: bridge
+
+volumes:
+  db:
+
+services:
+  # The global database, used for storing users, scores, game data, etc.
+  database:
+    # We're using PostgreSQL as per the subject's requirements
+    image: "bitnami/postgresql:13.15.0"
+    restart: unless-stopped
+    env_file: .env
+    healthcheck:
+      test: "pg_isready -U $POSTGRES_USER"
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    ports:
+      - "5432:5432"
+    networks:
+      - api
+    volumes:
+      - db:/var/lib/postgresql/data
+
+  # A Redis instance that will act as a fast cache layer
+  redis:
+    # We're using valkey, a redis fork by the Linux Foundation, since redis switched
+    # to using a non-free license a while ago, which is, dare I say it, *cringe*.
+    image: "valkey/valkey:7.2.5-alpine"
+    restart: unless-stopped
+
+  # RabbitMQ is a fast message queue, used for quick inter-service communication
+  rabbitmq:
+    image: "rabbitmq:3.13.4"
+    restart: unless-stopped
+    ports:
+      - "5672:5672"

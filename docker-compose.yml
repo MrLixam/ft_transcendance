@@ -1,46 +1,28 @@
-# ft_trans' services layout composition
+# ft_trans' root service layout composition
 version: "3.9"
+name: ft_trans
 
-# Storage volumes
-# volumes:
+include:
 
-# Internal networks
-networks:
-  api:
-
-# The actual services
 services:
-  # The backend / API
-  # api:
-  #   build: ./api
-  #   env_file: .env
-  #   restart: unless-stopped
-  #   ports:
-  #     - "1337:1337"
-  #   depends_on:
-  #     - "database"
-
-  # The frontend website
-  # frontend:
-  #   build: ./frontend
-  #   env_file: .env
-  #   restart: unless-stopped
-  #   ports:
-  #     - "80:42069"
-  #   depends_on:
-  #     - "api"
-
-  # A global database, used for storing users, scores, game data, etc.
-  database:
-    # We're using PostgreSQL as per the subject's requirements
-    image: postgres:latest
-    env_file: .env
+  # Use nginx as our HTTP server and reverse-proxy
+  nginx:
+    build: ./services/nginx
     restart: unless-stopped
     ports:
-      - "5432:5432"
-    networks:
-      - api
+      - "80:80"
+      - "443:443"
+    volumes:
+      - "./services/nginx/nginx.conf:/etc/nginx/nginx.conf"
+      - "./services/frontend:/etc/nginx/html"
 
-  # A Redis instance that will act as a fast cache-layer
-  # redis:
-  #   image: redis
+  # Use HashiCorp's Vault for credentials and secrets management (TLS config, API keys, passwords, etc..).
+  # vault:
+  #   image: "hashicorp/vault:1.17.1"
+  #   restart: always
+  #   ports:
+  #     - "8200:8200"
+  #     - "8201:8201"
+  #   cap_add:
+  #     - IPC_LOCK
+  #   entrypoint: vault server -config /vault/config/config.hcl
