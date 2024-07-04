@@ -40,4 +40,9 @@ if __name__ == "__main__":
     print("Total modules:")
     print("> Major:", total_major)
     print("> Minor:", total_minor)
-    print("> Effective Total:", total_major + int(total_minor / 2.))
+    e_total = total_major + int(total_minor / 2.0)
+    print("> Effective Total:", e_total, f"({total_major + total_minor / 2.})")
+    print("\nTotal project grade:")
+    points = 30 + total_minor * 5 + total_major * 10
+    print("> Points:", points)
+
