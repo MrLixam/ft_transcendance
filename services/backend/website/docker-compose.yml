@@ -1,0 +1,14 @@
+version: "3.9"
+name: ft_trans-backend-website
+
+networks:
+  backend:
+  nginx:
+
+services:
+  website:
+    build: .
+    env_file: ../../../.env
+    networks:
+      - backend
+      - nginx
