@@ -4,14 +4,18 @@
 
 ## Project structure
 
-- `services/`
-    - `backend/`
-      - The django backend, organized in a micro-services architecture 
-    - `frontend/`
-      - HTML/JavaScript front-end, to be served by the API
-    - `nginx/`
-      - HTTP Server configuration and setup files
-    - `docker-compose.yml`
+- `bin/` *external programs*
+  - `cli/`
+    - a CLI to interact with the REST API and play games
+- `scripts/` *somewhat useful random stuff :+1:*
+- `services/` *what makes this shit run*
+  - `backend/`
+    - The django backend, organized in a micro-services architecture 
+  - `frontend/`
+    - HTML/JavaScript front-end, to be served by the API
+  - `nginx/`
+    - HTTP Server configuration and setup files
+  - `docker-compose.yml`
 
 ## Chosen modules
 
