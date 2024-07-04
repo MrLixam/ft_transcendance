@@ -4,11 +4,14 @@
 
 ## Project structure
 
-- `api/` *the Django backend*
-  - The django backend, organized in a micro-services fashion
-- `frontend/` *the HTML front-end*
-- `nginx/`
-- `docker-compose.yml` *a compose config file*
+- `services/`
+    - `api/`
+      - The django backend, organized in a micro-services fashion
+    - `frontend/`
+      - HTML/JavaScript front-end, to be served by the API
+    - `nginx/`
+      - HTTP Server configuration and setup files
+    - `docker-compose.yml`
 
 ## Chosen modules
 
@@ -53,7 +56,7 @@ The transcendance project is split into multiple Minor and Major modules. Here a
   - [ ] (Minor) Expanding Browser compatibility
   - [ ] (Minor) Multiple language support
   - [ ] (Minor) Add accessibility for visually impaired users
-  - [ ] (Minor) Server-Side Rendering (SSR) integration
+  - [x] (Minor) Server-Side Rendering (SSR) integration
 
 - **Server-Side Pong**
   - [ ] (Major) Replace basic pong with server-side pong and implementing an API
