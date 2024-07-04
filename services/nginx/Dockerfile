@@ -1,4 +1,4 @@
-# Description: A custom nginx image with ModSecurity and OWASP CRS installed
+# Description: A custom nginx image with ModSecurity, OWASP CRS, and ngx_brotli installed
 
 
 ARG NGINX_IMAGE_VERSION=1.27.0
@@ -17,6 +17,7 @@ ENV OWASP_CRS_VERSION=4.4.0
 
 # Install tools and dependencies
 RUN apk update && apk add --no-cache \
+		git \
 		wget \
 		tar \
 		gzip \
@@ -28,11 +29,23 @@ RUN apk update && apk add --no-cache \
 		autoconf \
 		automake \
 		pcre-dev \
-		zlib-dev \
+		zlib-dev\
 		openssl \
 		openssl-dev \
 		curl \
+		cmake \
 		ca-certificates
+
+##> Download ngx_brotli <##
+
+RUN git clone --recurse-submodules -j8 https://github.com/google/ngx_brotli.git /tmp/ngx_brotli
+WORKDIR /tmp/ngx_brotli
+# Pin to known version
+RUN git checkout a71f9312c2deb28875acc7bacfdd5695a111aa53
+RUN mkdir /tmp/ngx_brotli/deps/brotli/out -p
+WORKDIR /tmp/ngx_brotli/deps/brotli/out
+RUN cmake -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=OFF -DCMAKE_C_FLAGS="-Ofast -m64 -march=native -mtune=native -flto -funroll-loops -ffunction-sections -fdata-sections -Wl,--gc-sections" -DCMAKE_CXX_FLAGS="-Ofast -m64 -march=native -mtune=native -flto -funroll-loops -ffunction-sections -fdata-sections -Wl,--gc-sections" -DCMAKE_INSTALL_PREFIX=./installed ..
+RUN cmake --build . --config Release --target brotlienc
 
 ##> Download ModSecurity <##
 
@@ -65,16 +78,21 @@ WORKDIR /tmp/nginx-${NGINX_IMG_VERSION}
 # Catch the current docker nginx' configure options
 RUN nginx -V 2>&1 | grep "configure arguments" > /tmp/nginx-configure-args.txt
 
-# Build the nginx with the ModSecurity module
+# Build nginx modules with ModSecurity and Brotli
 RUN sh -c "./configure --add-dynamic-module=../modsec-connector/modsecurity-nginx-v${MODSEC_CONNECTOR_VERSION} \
+	--with-compat --add-dynamic-module=/tmp/ngx_brotli \
 	$(cat /tmp/nginx-configure-args.txt | cut -d' ' -f3-)"
 RUN make modules
 
 # Copy the module to the nginx modules directory
 RUN mkdir -p /etc/nginx/modules
 RUN cp objs/ngx_http_modsecurity_module.so /etc/nginx/modules
+RUN cp objs/ngx_http_brotli_filter_module.so /etc/nginx/modules
+RUN cp objs/ngx_http_brotli_static_module.so /etc/nginx/modules
 
-##> Setup the OWASP ModSecurity Core Rule Set (CRS) <##
+#######################################################
+### Setup the OWASP ModSecurity Core Rule Set (CRS) ###
+#######################################################
 
 # Download and unpack
 RUN rm -rf /usr/share/modsecurity-crs
