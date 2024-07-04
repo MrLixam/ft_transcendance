@@ -34,10 +34,12 @@ if __name__ == "__main__":
                     minor = True if line.lower().startswith("(minor") else False
                     title = line[8:]
                     if minor:
+                        print("Found minor:", title)
                         total_minor += 1
                     else:
+                        print("Found major:", title)
                         total_major += 1
-    print("Total modules:")
+    print("\n\nTotal modules:")
     print("> Major:", total_major)
     print("> Minor:", total_minor)
     e_total = total_major + int(total_minor / 2.0)
