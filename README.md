@@ -5,8 +5,8 @@
 ## Project structure
 
 - `services/`
-    - `api/`
-      - The django backend, organized in a micro-services fashion
+    - `backend/`
+      - The django backend, organized in a micro-services architecture 
     - `frontend/`
       - HTML/JavaScript front-end, to be served by the API
     - `nginx/`

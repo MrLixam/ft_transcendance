@@ -1,3 +1,6 @@
+# Description: A custom nginx image with ModSecurity and OWASP CRS installed
+
+
 ARG NGINX_IMAGE_VERSION=1.27.0
 
 ####################################
@@ -5,6 +8,7 @@ ARG NGINX_IMAGE_VERSION=1.27.0
 ####################################
 
 FROM nginx:${NGINX_IMAGE_VERSION}-alpine
+LABEL maintainer="kiroussa <oss@xtrm.me>"
 
 ENV NGINX_IMG_VERSION=1.27.0
 ENV MODSEC_VERSION=3.0.12
@@ -88,8 +92,8 @@ RUN mv /usr/local/modsecurity-crs/rules/REQUEST-900-EXCLUSION-RULES-BEFORE-CRS.c
 
 RUN mkdir -p /etc/nginx/modsec
 RUN cp /tmp/modsec/modsecurity-v${MODSEC_VERSION}/unicode.mapping /etc/nginx/modsec
-COPY ./modsec.conf /etc/nginx/modsec/modsecurity.conf
-COPY ./modsec-main.conf /etc/nginx/modsec/main.conf
+COPY ./config/modsec.conf /etc/nginx/modsec/modsecurity.conf
+COPY ./config/modsec-main.conf /etc/nginx/modsec/main.conf
 
 # Copy the default configuration
 

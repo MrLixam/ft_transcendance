@@ -3,26 +3,6 @@ version: "3.9"
 name: ft_trans
 
 include:
-
-services:
-  # Use nginx as our HTTP server and reverse-proxy
-  nginx:
-    build: ./services/nginx
-    restart: unless-stopped
-    ports:
-      - "80:80"
-      - "443:443"
-    volumes:
-      - "./services/nginx/nginx.conf:/etc/nginx/nginx.conf"
-      - "./services/frontend:/etc/nginx/html"
-
-  # Use HashiCorp's Vault for credentials and secrets management (TLS config, API keys, passwords, etc..).
-  # vault:
-  #   image: "hashicorp/vault:1.17.1"
-  #   restart: always
-  #   ports:
-  #     - "8200:8200"
-  #     - "8201:8201"
-  #   cap_add:
-  #     - IPC_LOCK
-  #   entrypoint: vault server -config /vault/config/config.hcl
+  # - ./services/backend/docker-compose.yml
+  - ./services/nginx/docker-compose.yml
+  - ./services/vault/docker-compose.yml
