@@ -70,6 +70,18 @@ The transcendance project is split into multiple Minor and Major modules. Here a
 
 <!-- MODULES_END -->
 
+## Usage
+
+To start everything, simply run:
+
+```bash
+# with modern compose
+docker compose up --build -d
+
+# or with legacy cli
+docker-compose up --build -d
+```
+
 ## License
 
 This project is released under the [ISC License](./LICENSE).
