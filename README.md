@@ -17,6 +17,8 @@
 
 The transcendance project is split into multiple Minor and Major modules. Here are the one we're doing:
 
+<!-- MODULES_START -->
+
 - **Web**
   - [x] (Major) Use a Framework as backend
   - [x] (Minor) Use a front-end framework or toolkit
@@ -61,6 +63,8 @@ The transcendance project is split into multiple Minor and Major modules. Here a
 - **Server-Side Pong**
   - [ ] (Major) Replace basic pong with server-side pong and implementing an API
   - [ ] (Major) Enabling pong gameplay via CLI against web users with API integration
+
+<!-- MODULES_END -->
 
 ## License
 
