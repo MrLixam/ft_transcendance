@@ -1,0 +1,10 @@
+version: "3.9"
+name: ft_trans-elk
+
+networks:
+  elk:
+    driver: bridge
+
+services:
+#TODO
+
