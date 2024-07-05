@@ -1,8 +1,8 @@
 # ft_trans' root service layout composition
-version: "3.9"
 name: ft_trans
 
 include:
   - ./services/backend/docker-compose.yml
   - ./services/nginx/docker-compose.yml
+  - ./services/website/docker-compose.yml
   # - ./services/vault/docker-compose.yml

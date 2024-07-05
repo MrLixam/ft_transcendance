@@ -1,5 +1,5 @@
 {
-  description = "dev-env for python3+django";
+  description = "dev-env for ft_trans' frontend";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
@@ -18,14 +18,12 @@
       {
         devShell = pkgs.mkShell {
           nativeBuildInputs = with pkgs; [
-            python312
-            
-            python312Packages.django
-
-            python312Packages.black
-            python312Packages.mypy
+            nodejs
+            pnpm
           ];
         };
       }
     );
 }
+# vim: ts=2 sw=2 et
+

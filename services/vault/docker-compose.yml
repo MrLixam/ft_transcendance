@@ -1,4 +1,3 @@
-version: "3.9"
 name: ft_trans-vault
 
 volumes:

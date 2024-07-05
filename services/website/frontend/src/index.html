@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="{{ lang }}">
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<meta charset="utf-8">
+		<title>{{ title }} &mdash; {{ website_title }}</title>
+	</head>
+	<body>
+		<h1></h1>
+		<p>It works!</p>
+
+		<button class="btn btn-primary"
+			id="htmx-example-replace"
+			hx-get="/api/v1/test"
+			hx-trigger="click"
+			hx-swap="outerHTML"
+		>
+			Click me!
+		</button>
+	</body>
+</html>

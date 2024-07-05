@@ -1,0 +1,24 @@
+{
+  "name": "frontend",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "build": "rsbuild build",
+    "check": "biome check --write src",
+    "dev": "rsbuild dev --open",
+    "format": "biome format --write src",
+    "preview": "rsbuild preview"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^1.8.3",
+    "@rsbuild/core": "1.0.0-alpha.4",
+    "@rsbuild/plugin-image-compress": "1.0.0-alpha.4",
+    "@rsbuild/plugin-lightningcss": "1.0.0-alpha.4",
+    "@rsbuild/plugin-sass": "1.0.0-alpha.4"
+  },
+  "dependencies": {
+    "@popperjs/core": "^2.11.8",
+    "bootstrap": "5.3.3",
+    "htmx.org": "2.0.0"
+  }
+}
