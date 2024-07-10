@@ -25,7 +25,7 @@ The transcendance project is split into multiple Minor and Major modules. Here a
 
 - **Web**
   - [x] (Major) Use a Framework as backend
-  - [x] (Minor) Use a front-end framework or toolkit
+  - [ ] (Minor) Use a front-end framework or toolkit
   - [x] (Minor) ✅ Use a database for the backend
   - [ ] (Major) Store the score of a tournament in a Blockchain
 
@@ -34,10 +34,10 @@ The transcendance project is split into multiple Minor and Major modules. Here a
   - [x] (Major) Implementing remote authentication (OAuth2)
 
 - **Gameplay and User Experience**
-  - [ ] (Major) Remote players
+  - [x] (Major) Remote players `lvincent`
   - [ ] (Major) Multiplayer (> 2 players)
   - [ ] (Major) Add another Game (w/ User History & Matchmaking)
-  - [ ] (Minor) Game customization options
+  - [ ] (Minor) Game customization options 
   - [ ] (Major) Live chat
 
 - **AI / Algorithm**
@@ -58,10 +58,10 @@ The transcendance project is split into multiple Minor and Major modules. Here a
   - [ ] (Major) Use of advanced 3D techniques.
 
 - **Accessibility**
-  - [ ] (Minor) Support on all devices
-  - [ ] (Minor) Expanding Browser compatibility
-  - [ ] (Minor) Multiple language support
-  - [ ] (Minor) Add accessibility for visually impaired users
+  - [x] (Minor) Support on all devices
+  - [x] (Minor) Expanding Browser compatibility
+  - [x] (Minor) Multiple language support
+  - [x] (Minor) Add accessibility for visually impaired users
   - [x] (Minor) Server-Side Rendering (SSR) integration
 
 - **Server-Side Pong**

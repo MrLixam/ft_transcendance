@@ -2,10 +2,10 @@
 # -*- coding: utf-8 -*-
 
 from django.core.management.utils import get_random_secret_key
-from django.http import HttpResponse
-from django.shortcuts import redirect
-from django.urls import path, re_path
-from .decorators import template
+from django.http import HttpResponse, HttpRequest
+# from django.shortcuts import redirect
+from django.shortcuts import render
+from django.urls import re_path
 import os
 
 
@@ -30,22 +30,42 @@ STATICFILES_DIRS = [
 STATIC_URL = 'static/'
 
 
-@template('index.html')
-def home(_):
-    title = "Welcome"
-    website_title = "ft_trans"
-    return locals()
+def _find_template(
+    request: HttpRequest,
+    path: str | None = None
+) -> HttpResponse | None:
+    path = request.path if path is None else path
+    if path.startswith('/'):
+        path = path[1:]
+    for staticpath in TEMPLATES[0]["DIRS"]:
+        target = staticpath + path
+        if os.path.exists(target):
+            abs = os.path.abspath(target)
+            return render(request, abs)
+    return None
 
 
-# TODO: move this to backend/api-service
-def test(_):
-    return HttpResponse("<p>fuck you :3</p>")
+def find_template(request: HttpRequest) -> HttpResponse:
+    template = _find_template(request)
+    if template is None:
+        template = _find_template(request, path='404.html')
+        if template is None:
+            return HttpResponse(
+                "Not found.",
+                status=404,
+                content_type='text/plain'
+            )
+    return template
+
+
+def home(request):
+    if request.path == '/':
+        request.path = '/index.html'
+    return find_template(request)
 
 
 urlpatterns = [
-    # TODO: move this to backend/api-service
-    path('api/v1/test', test, name='test'),
-
-    re_path(r'^$', home, name='home'),
-    re_path(r'^(?!static\/|$)', lambda _: redirect('home')),
+    # path('.*', home, name='home'),
+    # Regex to anything that doesnt start with /static/
+    re_path(r'^(?!static/).*', home),
 ]
