@@ -41,6 +41,9 @@ def _find_template(
         target = staticpath + path
         if os.path.exists(target):
             abs = os.path.abspath(target)
+            # if it's a directory, add /index.html
+            if os.path.isdir(abs):
+                abs = os.path.join(abs, 'index.html')
             return render(request, abs)
     return None
 
