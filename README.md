@@ -36,7 +36,7 @@ The transcendance project is split into multiple Minor and Major modules. Here a
 - **Gameplay and User Experience**
   - [x] (Major) Remote players `lvincent`
   - [ ] (Major) Multiplayer (> 2 players)
-  - [ ] (Major) Add another Game (w/ User History & Matchmaking)
+  - [x] (Major) Add another Game (w/ User History & Matchmaking) `lvincent`
   - [ ] (Minor) Game customization options 
   - [ ] (Major) Live chat
 
@@ -55,7 +55,7 @@ The transcendance project is split into multiple Minor and Major modules. Here a
   - [x] (Major) Designing the Backend as Microservices `kiroussa` 
 
 - **Graphics**
-  - [ ] (Major) Use of advanced 3D techniques.
+  - [x] (Major) Use of advanced 3D techniques. `lvincent`
 
 - **Accessibility**
   - [x] (Minor) Support on all devices
