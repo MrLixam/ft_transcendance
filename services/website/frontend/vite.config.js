@@ -2,7 +2,7 @@ import { defineConfig } from 'vite'
 import { resolve } from 'path'
 import { globby } from 'globby'
 
-import { createHtmlPlugin } from 'vite-plugin-html'
+import { ViteMinifyPlugin } from 'vite-plugin-minify'
 
 /**
  * Resolve all entry '.html' files recursively in the project
@@ -29,7 +29,7 @@ async function resolveInputs(rootDir) {
       continue;
     }
     let name = file.replace(/\.html$/, '');
-    // name = name.replace(/\//g, '_');
+    name = name.replace(/\//g, '_');
     // console.log('name', name);
     inputs[name] = resolve(rootDir, file);
   }
@@ -38,11 +38,15 @@ async function resolveInputs(rootDir) {
 
 export default defineConfig(async ({ command, mode }) => {
   const inputs = await resolveInputs(__dirname);
+  // console.log(inputs);
   return {
+    appType: 'mpa', // tkt
     plugins: [
-      createHtmlPlugin({
-        minify: true,
-      }),
+      // createHtmlPlugin({
+      //   minify: true,
+      // }),
+      // rewriteSlashToIndexHtml(),
+      ViteMinifyPlugin({}),
     ],
     base: '',
     build: {
@@ -52,7 +56,6 @@ export default defineConfig(async ({ command, mode }) => {
         input: inputs, 
       }
     },
-    appType: 'mpa',
     css: {
       transformer: 'postcss',
       loaderOptions: {

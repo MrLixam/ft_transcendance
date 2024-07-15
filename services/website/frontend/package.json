@@ -16,7 +16,7 @@
     "lightningcss": "^1.25.1",
     "sass": "1.77.6",
     "vite": "^5.3.3",
-    "vite-plugin-html": "^3.2.2"
+    "vite-plugin-minify": "^1.5.2"
   },
   "dependencies": {
     "@popperjs/core": "^2.11.8",
