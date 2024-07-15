@@ -1,32 +1,34 @@
 {
-  description = "dev-env for python3+django";
+  description = "ft_transcendence's standard django flake (website service)";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
-    flake-utils.url = "github:numtide/flake-utils";
+    nixpkgs.url = "github:NixOS/nixpkgs?ref=nixos-unstable";
   };
 
-  outputs = {
-    self,
-    nixpkgs,
-    flake-utils
-  }: flake-utils.lib.eachDefaultSystem
-    (system:
-      let
-        pkgs = nixpkgs.legacyPackages.${system};
-      in
-      {
-        devShell = pkgs.mkShell {
-          nativeBuildInputs = with pkgs; [
-            poetry
-            python312
-            
-            python312Packages.django
-
-            python312Packages.black
-            python312Packages.mypy
-          ];
-        };
-      }
-    );
+  outputs =
+    { self, nixpkgs }:
+    let
+      inherit (self) outputs;
+      systems = [
+        "aarch64-linux"
+        "x86_64-linux"
+        "aarch64-darwin"
+        "x86_64-darwin"
+      ];
+      forAllSystems = nixpkgs.lib.genAttrs systems;
+    in
+    {
+      devShells = forAllSystems (
+        system:
+        let
+          pkgs = import nixpkgs { inherit system; };
+        in
+        {
+          default = import ./shell.nix { inherit pkgs; };
+        }
+      );
+    };
 }
+
+# vim: ts=2 sw=2 et
+

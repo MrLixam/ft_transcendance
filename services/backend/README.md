@@ -23,6 +23,3 @@
 
 - `user-service/`
   - Manages users, no clue what to say about it lol
-
-- `website/`
-  - Provides the website's rendered pages directly over nginx

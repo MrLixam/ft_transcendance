@@ -55,15 +55,15 @@ def find_template(request: HttpRequest) -> HttpResponse:
         if template is None:
             return HttpResponse(
                 "Not found.",
-                status=404,
+                status=200,
                 content_type='text/plain'
             )
     return template
 
 
 def home(request):
-    if request.path == '/':
-        request.path = '/index.html'
+    if request.path.endswith('/'):
+        request.path += 'index.html'
     return find_template(request)
 
 

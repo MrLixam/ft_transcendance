@@ -24,7 +24,7 @@ The transcendance project is split into multiple Minor and Major modules. Here a
 <!-- MODULES_START -->
 
 - **Web**
-  - [x] (Major) Use a Framework as backend
+  - [x] (Major) ✅ Use a Framework as backend
   - [ ] (Minor) Use a front-end framework or toolkit
   - [x] (Minor) ✅ Use a database for the backend
   - [ ] (Major) Store the score of a tournament in a Blockchain
@@ -45,7 +45,7 @@ The transcendance project is split into multiple Minor and Major modules. Here a
   - [ ] (Minor) User and Game stats dashboard
 
 - **Cybersecurity**
-  - [x] (Major) Implement WAF/ModSecurity w/ Hardened Configuration and HashiCorp Vault for Secrets Management `kiroussa`
+  - [x] (Major) ✅ Implement WAF/ModSecurity w/ Hardened Configuration and HashiCorp Vault for Secrets Management `kiroussa`
   - [ ] (Minor) GDPR Compliance options with User Anonymization, local data management, and account deletion
   - [x] (Major) Implement Two-Factor Authentication (2FA) and JWT
 
