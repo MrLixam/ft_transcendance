@@ -19,6 +19,7 @@
     "vite-plugin-minify": "^1.5.2"
   },
   "dependencies": {
+    "@catppuccin/palette": "^1.2.0",
     "@popperjs/core": "^2.11.8",
     "bootstrap": "5.3.3",
     "htmx.org": "2.0.0"
