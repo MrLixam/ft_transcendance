@@ -58,6 +58,11 @@ export default defineConfig(async ({ _, __ }) => {
         },
       },
     },
+    resolve: {
+      alias: {
+        '~': __dirname,
+      },
+    },
     server: {
       watch: {
         ignored: ["**/.direnv/**", "**/node_modules/**", "**/.git/**", "**/dist/**"],
