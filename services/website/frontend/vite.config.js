@@ -14,9 +14,7 @@ import { ViteMinifyPlugin } from 'vite-plugin-minify'
 async function resolveInputs(rootDir) {
   const inputs = {};
   const ignoredDirs = ['dist', 'public', 'static', 'node_modules', '.git'];
-  // console.log("WE WORKIN HERE");
   const files = await globby('**/*.html', { cwd: rootDir });
-  // console.log(files);
   for (const file of files) {
     let process = true;
     for (const dir of ignoredDirs) {
@@ -30,22 +28,16 @@ async function resolveInputs(rootDir) {
     }
     let name = file.replace(/\.html$/, '');
     name = name.replace(/\//g, '_');
-    // console.log('name', name);
     inputs[name] = resolve(rootDir, file);
   }
   return inputs;
 }
 
-export default defineConfig(async ({ command, mode }) => {
+export default defineConfig(async ({ _, __ }) => {
   const inputs = await resolveInputs(__dirname);
-  // console.log(inputs);
   return {
     appType: 'mpa', // tkt
     plugins: [
-      // createHtmlPlugin({
-      //   minify: true,
-      // }),
-      // rewriteSlashToIndexHtml(),
       ViteMinifyPlugin({}),
     ],
     base: '',
@@ -68,7 +60,7 @@ export default defineConfig(async ({ command, mode }) => {
     },
     server: {
       watch: {
-        ignored: ["**/.direnv/**"],
+        ignored: ["**/.direnv/**", "**/node_modules/**", "**/.git/**", "**/dist/**"],
       },
     },
   }

@@ -1,24 +1,29 @@
 <!DOCTYPE html>
 <html lang="{{ lang }}">
 	<head>
+		<!-- User scalability is set to none so that it feels more like a native app -->
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 		<meta charset="utf-8">
 		<title>{{ title }} &mdash; {{ website_title }}</title>
 	</head>
-	<body>
-		<h1>ft_trans</h1>
-		<!-- <h2>{{ translate("pages.main.subtitle") }}</h2> -->
+	<body class="w-full">
+		<header class="w-full min-h-48 bg-teal-500">
+			<a href="/">
+				<img src="/assets/logo.png" alt="ft_trans logo">
+			</a>
+			<nav>
+				<ul>
+					<li><a href="/">{{ translate("pages.main.home") }}</a></li>
+					<li><a href="/login">{{ translate("pages.main.login") }}</a></li>
+					<li><a href="/register">{{ translate("pages.main.register") }}</a></li>
+				</ul>
+			</nav>
+		</header>
+		<main>
+			<section id="hero" class="min-h-svh bg-teal-200">
+			</section>
+		</main>
 
-		<!-- <a href="/login">Login: {{ translate("pages.main.login") }}</a> -->
-
-		<button class="btn btn-primary"
-			id="htmx-example-replace"
-			hx-get="/api/v1/test"
-			hx-trigger="click"
-			hx-swap="outerHTML"
-		>
-			Click me!
-		</button>
 		<script type="module" src="index.js"></script>
 	</body>
 </html>
