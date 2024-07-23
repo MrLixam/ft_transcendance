@@ -34,16 +34,19 @@ async function resolveInputs(rootDir) {
 }
 
 export default defineConfig(async ({ _, __ }) => {
-  const inputs = await resolveInputs(__dirname);
+  const root = 'src';
+  const inputs = await resolveInputs(resolve(__dirname, root));
   return {
     appType: 'mpa', // tkt
     plugins: [
       ViteMinifyPlugin({}),
     ],
+    root: root,
     base: '',
     build: {
       assetsDir: 'static',
       cssMinify: 'lightningcss',
+      outDir: '../dist',
       rollupOptions: {
         input: inputs, 
       }
