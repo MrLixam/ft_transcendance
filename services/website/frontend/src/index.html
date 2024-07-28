@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html lang="{{ lang }}">
 	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<!-- User scalability is set to none so that it feels more like a native app -->
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-		<meta charset="utf-8">
 		<title>{{ title }} &mdash; {{ website_title }}</title>
+		<script defer type="module" src="/shared.js"></script>
 	</head>
-	<body class="macchiato w-full bg-ctp-base">
-		<header class="w-full min-h-48 bg-teal-500">
+	<body class="w-full bg-mantle">
+		<header class="w-full bg-teal-500 min-h-48">
 			<a href="/">
 				<img src="/assets/logo.png" alt="ft_trans logo">
 			</a>
@@ -20,10 +22,8 @@
 			</nav>
 		</header>
 		<main>
-			<section id="hero" class="min-h-svh bg-teal-200">
+			<section id="hero" class="bg-teal-200 min-h-svh">
 			</section>
 		</main>
-
-		<script type="module" src="index.js"></script>
 	</body>
 </html>

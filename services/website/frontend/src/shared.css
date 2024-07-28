@@ -1,0 +1,24 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+    @keyframes button-pop {
+        0% {
+            transform: scale(.98)
+        }
+
+        40% {
+            transform: scale(1.02)
+        }
+
+        to {
+            transform: scale(1)
+        }
+    }
+
+    .btn {
+        @apply px-4 py-2 text-sm font-semibold rounded-md shadow-sm transition-all duration-150 ease-in-out;
+        animation: button-pop .25s ease-out; 
+    }
+}

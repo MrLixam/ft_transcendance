@@ -1,16 +1,22 @@
+import { createThemes } from "tw-colors";
+import buildCatppuccinThemes from "./lib/tailwind/buildCatppuccinThemes.js";
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ["./**/*.{html,css,js}"],
-  theme: {
-    extend: {},
-  },
+  content: ["./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}"],
   plugins: [
-    require("@catppuccin/tailwindcss")({
-      // prefix to use, e.g. `text-pink` becomes `text-ctp-pink`.
-      // default is `false`, which means no prefix
-      prefix: "ctp",
-      // which flavour of colours to use by default, in the `:root`
-      defaultFlavour: "macchiato",
+    require('@tailwindcss/typography'),
+    require("tailwindcss-animate"),
+    createThemes({
+      ...buildCatppuccinThemes('catppuccin-'),
+    }, {
+      produceThemeClass: (themeName) => `theme-${themeName}`,
+      strict: true,
+      defaultTheme: {
+        light: 'catppuccin-latte',
+        dark: 'catppuccin-mocha',
+      }
     }),
   ],
 };
+// vim: set ts=2 sw=2 et:
