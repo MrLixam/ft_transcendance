@@ -13,19 +13,8 @@ import { ViteMinifyPlugin } from 'vite-plugin-minify'
  */
 async function resolveInputs(rootDir) {
   const inputs = {};
-  const ignoredDirs = ['dist', 'public', 'static', 'node_modules', '.git'];
   const files = await globby('**/*.html', { cwd: rootDir });
   for (const file of files) {
-    let process = true;
-    for (const dir of ignoredDirs) {
-      if (file.startsWith(dir)) {
-        process = false;
-        break;
-      }
-    }
-    if (!process) {
-      continue;
-    }
     let name = file.replace(/\.html$/, '');
     name = name.replace(/\//g, '_');
     inputs[name] = resolve(rootDir, file);
