@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="{{ lang }}" class="scroll-smooth">
-
 <head>
 	<meta charset="utf-8">
 	<!-- User scalability is set to none so that it feels more like a native app -->
@@ -27,7 +26,7 @@
 	<script defer type="module" src="/shared.js"></script>
 </head>
 
-<body class="p-0 m-0 w-full bg-mantle font-sans text-text contextual [&_*]:transition-colors [&_*]:duration-300">
+<body class="p-0 m-0 w-full bg-base font-sans text-text contextual [&_*]:transition-colors [&_*]:duration-300">
 	<noscript>
 		<div class="flex justify-center items-center w-full h-svh">
 			<div class="w-full max-w-md">
@@ -37,7 +36,7 @@
 		</div>
 	</noscript>
 	<header
-		class="container fixed top-0 left-0 right-0 mx-auto px-8 pt-4 pb-5 rounded-b-xl bg-surface0/65 hover:bg-surface0/95 backdrop-blur-3xl min-h-12 z-10">
+		class="container fixed top-0 left-0 right-0 mx-auto px-8 pt-4 pb-5 rounded-b-xl bg-surface0/75 hover:bg-surface0/90 backdrop-blur-3xl min-h-12 z-10">
 		<nav class="flex flex-row justify-between items-center">
 			<!-- <a href="/">
 				<img src="/static/assets/logo.webp" alt="ft_trans logo">
@@ -49,8 +48,8 @@
 			</div> -->
 			<div class="flex flex-row gap-8">
 				<button onclick="toggleTheme()" class="btn bg-surface1/75 hover:bg-surface2 active:bg-mantle px-4 rounded-lg"><i class="inline" data-feather="edit-3"></i> Change Theme</button>
-					<a class="btn bg-surface1/75 hover:bg-surface2 rounded-lg px-12" href="/login/">
-						<button>Login</button>
+					<a class="btn bg-surface1/75 hover:bg-surface2 rounded-lg px-4" href="/login/"> 
+						<button><i class="inline" data-feather="log-in"></i> Login</button>
 					</a>
 			</div>
 		</nav>
